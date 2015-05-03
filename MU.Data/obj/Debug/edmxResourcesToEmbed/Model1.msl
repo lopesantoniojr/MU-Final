@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExemploModelStoreContainer" CdmEntityContainer="ExemploEntities">
+    <EntitySetMapping Name="TB_PESSOA">
+      <EntityTypeMapping TypeName="ExemploModel.TB_PESSOA">
+        <MappingFragment StoreEntitySet="TB_PESSOA">
+          <ScalarProperty Name="ID_PESSOA" ColumnName="ID_PESSOA" />
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="NOME_PESSOA" ColumnName="NOME_PESSOA" />
+          <ScalarProperty Name="DT_CRIACAO" ColumnName="DT_CRIACAO" />
+          <ScalarProperty Name="DT_ALTERACAO" ColumnName="DT_ALTERACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PESSOA_FISICA">
+      <EntityTypeMapping TypeName="ExemploModel.TB_PESSOA_FISICA">
+        <MappingFragment StoreEntitySet="TB_PESSOA_FISICA">
+          <ScalarProperty Name="ID_PESSOA" ColumnName="ID_PESSOA" />
+          <ScalarProperty Name="DT_NASCIMENTO" ColumnName="DT_NASCIMENTO" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

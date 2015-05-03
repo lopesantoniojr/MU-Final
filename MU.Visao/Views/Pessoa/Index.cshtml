@@ -1,0 +1,48 @@
+﻿@model MU.MVVM.PessoaModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Create", "Pessoa"))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Cadastrar Pessoa</legend>
+
+        @Html.HiddenFor(model => model.OID)
+        @Html.HiddenFor(model => model.CriadoEm)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <p>
+            <input type="submit" value="Salvar" />
+        </p>
+    </fieldset>
+    
+    if (Model != null && Model.Salvou)
+    {
+       <script type="text/javascript">
+          $("#Nome").val = '';
+          alert('Salvo com sucesso.');
+       </script>
+    }
+}
+
+<div>
+    @Html.ActionLink("Listar Pessoas", "ListarTodos")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExemploModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ExemploEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="TB_PESSOA" EntityType="ExemploModel.TB_PESSOA" />
+    <EntitySet Name="TB_PESSOA_FISICA" EntityType="ExemploModel.TB_PESSOA_FISICA" />
+    <AssociationSet Name="FK4CC8AD083436D492" Association="ExemploModel.FK4CC8AD083436D492">
+      <End Role="TB_PESSOA" EntitySet="TB_PESSOA" />
+      <End Role="TB_PESSOA_FISICA" EntitySet="TB_PESSOA_FISICA" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TB_PESSOA">
+    <Key>
+      <PropertyRef Name="ID_PESSOA" />
+    </Key>
+    <Property Name="ID_PESSOA" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CID" Type="Int64" Nullable="false" />
+    <Property Name="NOME_PESSOA" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="DT_CRIACAO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DT_ALTERACAO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TB_PESSOA_FISICA" Relationship="ExemploModel.FK4CC8AD083436D492" FromRole="TB_PESSOA" ToRole="TB_PESSOA_FISICA" />
+  </EntityType>
+  <EntityType Name="TB_PESSOA_FISICA">
+    <Key>
+      <PropertyRef Name="ID_PESSOA" />
+    </Key>
+    <Property Name="ID_PESSOA" Type="Int64" Nullable="false" />
+    <Property Name="DT_NASCIMENTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CPF" Type="String" Nullable="false" MaxLength="11" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="TB_PESSOA" Relationship="ExemploModel.FK4CC8AD083436D492" FromRole="TB_PESSOA_FISICA" ToRole="TB_PESSOA" />
+  </EntityType>
+  <Association Name="FK4CC8AD083436D492">
+    <End Role="TB_PESSOA" Type="ExemploModel.TB_PESSOA" Multiplicity="1" />
+    <End Role="TB_PESSOA_FISICA" Type="ExemploModel.TB_PESSOA_FISICA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TB_PESSOA">
+        <PropertyRef Name="ID_PESSOA" />
+      </Principal>
+      <Dependent Role="TB_PESSOA_FISICA">
+        <PropertyRef Name="ID_PESSOA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

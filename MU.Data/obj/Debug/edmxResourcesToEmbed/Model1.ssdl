@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExemploModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ExemploModelStoreContainer">
+    <EntitySet Name="TB_PESSOA" EntityType="ExemploModel.Store.TB_PESSOA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TB_PESSOA_FISICA" EntityType="ExemploModel.Store.TB_PESSOA_FISICA" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK4CC8AD083436D492" Association="ExemploModel.Store.FK4CC8AD083436D492">
+      <End Role="TB_PESSOA" EntitySet="TB_PESSOA" />
+      <End Role="TB_PESSOA_FISICA" EntitySet="TB_PESSOA_FISICA" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TB_PESSOA">
+    <Key>
+      <PropertyRef Name="ID_PESSOA" />
+    </Key>
+    <Property Name="ID_PESSOA" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CID" Type="bigint" Nullable="false" />
+    <Property Name="NOME_PESSOA" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+    <Property Name="DT_ALTERACAO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TB_PESSOA_FISICA">
+    <Key>
+      <PropertyRef Name="ID_PESSOA" />
+    </Key>
+    <Property Name="ID_PESSOA" Type="bigint" Nullable="false" />
+    <Property Name="DT_NASCIMENTO" Type="datetime" Nullable="false" />
+    <Property Name="CPF" Type="nvarchar" Nullable="false" MaxLength="11" />
+  </EntityType>
+  <Association Name="FK4CC8AD083436D492">
+    <End Role="TB_PESSOA" Type="ExemploModel.Store.TB_PESSOA" Multiplicity="1" />
+    <End Role="TB_PESSOA_FISICA" Type="ExemploModel.Store.TB_PESSOA_FISICA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TB_PESSOA">
+        <PropertyRef Name="ID_PESSOA" />
+      </Principal>
+      <Dependent Role="TB_PESSOA_FISICA">
+        <PropertyRef Name="ID_PESSOA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

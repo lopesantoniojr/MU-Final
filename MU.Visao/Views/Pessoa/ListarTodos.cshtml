@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MU.MVVM.PessoaModel>
+
+@{
+    ViewBag.Title = "ListarTodos";
+}
+
+<h2>ListarTodos</h2>
+
+<p>
+    @Html.ActionLink("Criar Nova Pessoa", "Index")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.OID }) |
+            @Ajax.ActionLink("Detalhes", "Detalhe", new { id = item.OID }, new AjaxOptions
+       {
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "detalhe",
+           OnSuccess = "Sucesso()"
+       }) |
+            @Html.ActionLink("Apagar", "Apagar",
+            new { id = item.OID },
+            new { onclick = "return confirm('Deseja realmente apagar?');" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="detalhe">
+</div>
+@section scripts{
+    <script type="text/javascript">
+        function Sucesso() {
+
+            $("#detalhe").show();
+        }
+    </script>
+}

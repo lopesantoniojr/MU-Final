@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MU.MVVM.ProdutoModel>
+
+@{
+    ViewBag.Title = "Produtos";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Novo Produto", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataValidade)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataValidade)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.IdProduto }) |
+                @Html.ActionLink("Excluir", "Excluir", new { id = item.IdProduto },
+                                new { onclick = "return confirm('Deseja realmente apagar?');" })
+            </td>
+        </tr>
+    }
+
+</table>

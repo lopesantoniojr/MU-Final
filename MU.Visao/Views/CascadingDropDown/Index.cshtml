@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Exemplo Cascading DropDownList";
+}
+<h2>Exemplo Cascading DropDownList</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlPais").change(function () {
+            $("#ddlEstado").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetEstados")',
+                dataType: 'json',
+                data: { id: $("#ddlPais").val() },
+                success: function (estados) {
+                    $.each(estados, function (i, estado) {
+                        $("#ddlEstado").append('<option value="' + estado.Value + '">' + estado.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Erro ao obter os estados.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlEstado").change(function () {
+            $("#ddlCidade").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetCidades")',
+                dataType: 'json',
+                data: { id: $("#ddlEstado").val() },
+                success: function (cidades) {
+                    $.each(cidades, function (i, cidade) {
+                        $("#ddlCidade").append('<option value="' + cidade.Value + '">' + cidade.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Erro ao obter as cidades.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>
+@using (Html.BeginForm("ClickBotao", "CascadingDropDown"))
+{ 
+    <div>
+        <div>
+            @Html.Label("País:")
+            @Html.DropDownList("ddlPais", ViewData["pais"] as List<SelectListItem>, new { style = "width:250px" })
+        </div>
+        <br />
+        <div>
+            @Html.Label("Estado:", new { style = "width:250px" })
+            @Html.DropDownList("ddlEstado", new SelectList(string.Empty, "Value", "Text"), "Selecione o país primeiro", new { style = "width:250px" })
+        </div>
+        <br />
+        <div>
+            @Html.Label("Cidade", new { style = "width:250px" })
+            @Html.DropDownList("ddlCidade", new SelectList(string.Empty, "Value", "Text"), "Selecione o estado primeiro", new { style = "width:250px" })
+        </div>
+        <br />
+        <input id="btnEnviar" type="submit" value="Enviar" />
+    </div>
+}

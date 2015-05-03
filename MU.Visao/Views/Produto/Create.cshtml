@@ -1,0 +1,63 @@
+﻿@model MU.MVVM.ProdutoModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Produto"))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ProdutoModel</legend>
+
+        @Html.HiddenFor(model => model.IdProduto)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descricao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Unidade)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Unidade)
+            @Html.ValidationMessageFor(model => model.Unidade)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Preco)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Preco)
+            @Html.ValidationMessageFor(model => model.Preco)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataValidade)
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("DataValidade", (Model != null && Model.DataValidade.HasValue ? Model.DataValidade.Value.ToString("dd/MM/yyyy") : ""))
+            @Html.ValidationMessageFor(model => model.DataValidade)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
